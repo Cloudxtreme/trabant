@@ -61,5 +61,3 @@ emcc \
   tweetnacl.c \
   pkc_skein.c \
   trabant.c
-
-cp trabant.min.js ../web/app/static/js
