@@ -13,7 +13,7 @@ No big surprises here for you applied crypto folks, but you can do just about an
 Also, a very clean reference implementation like the one sent to NIST gives us a great piece of bedrock upon which to build all the primitives we use in Balboa.
 
 ## TweetNaCl
-NaCl needs no introduction. Just a great library for ed25519. We use tweetnacl because it is just a lot easier to compile.
+NaCl needs no introduction. Just a great library filled with great crypto primitives. We use the TweetNaCl variant because it is just a lot easier to compile. Furthermore, we use the ed25519 box/open part of NaCl, just a small slice of a really awesome, elegant, and surprisingly developer-friendly API.
 
 ## Hash
 Skein-1024 PRF with a personalization string.
