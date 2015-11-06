@@ -1,11 +1,14 @@
 # trabant
 A C library meant to be used with [Emscripten](https://github.com/kripken/emscripten) to provide some needed cryptographic primitives in Javascript, or, in our case, [Clojurescript](https://github.com/clojure/clojurescript).
 
-Javascript has a whole host of great cryptography libraries you can use. SJCL is a good one, for example. We are putting ours out there so people can vet our product, [Balboa](https://balboa.io). If you like what you see, feel free to just take it.
+Javascript already has some good cryptography libraries you can use. SJCL is a good one, for example. We are putting ours out there so people can vet our product, [Balboa](https://balboa.io), and because ASM.js gives us an edge. If you like what you see, feel free to just take it.
 
 ## Goals
 
 *The goal of this library is to get out of the way.* We merely copy, as faithfully as possible, the awesome work of [the Skein team](https://www.schneier.com/skein-team.html), [Colin Percival (scrypt)](http://www.tarsnap.com/scrypt.html), and [Daniel J. Bernstein (DJB)](http://tweetnacl.cr.yp.to/). All this library tries to accomplish is to call the underlying implementations with as little chance for screw up imaginable. Any excess ceremony should be perceived as a bug and corporal force should be executed against it with extreme prejudice.
+
+##### Aside: "Javascrypt Cryptopgrahy Considered Harmful" Considered Old-school 
+The value of a library like trabant has been a source of many debates since Thomas Ptacek's 2011 article [Javascript Cryptography Considered Harmful]( https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/august/javascript-cryptography-considered-harmful). We feel crypto in the browser as advanced tremendously since 2011, to the point where it is no longer harmful. We  adamantly believe the browser is a space worthy of pursuit for the cryptographer.
 
 ## Skein 1024 as Swiss Army Knife 
 No big surprises here for you applied crypto folks, but you can do just about anything with one really good pseudo-random function. Thankfully, the Skein team gave us a great one in the SHA-3 competition. Simple and elegant ARX construction, fast on x86/x64, and no huge advantage on an ASIC (compared to Keccak). Since this will end up running on general purpose computers, this is good for us.
@@ -22,7 +25,7 @@ Skein-1024 PRF with a personalization string.
 Skein-1024 PRF with a personalization string, and a key passed to the PRF as well.
 
 ## Stream Cipher
-Skein-1024 is built around a sweet block cipher, Threefish. We use the 1024 variant, which is pretty gratuitous, but [mugging is probably making a comeback](https://www.youtube.com/watch?v=NDQoMv4WBlc&t=54s).
+Skein-1024 is built around a sweet block cipher, Threefish. We use the 1024 variant, which is pretty gratuitous, but times are tough, and cycles are cheap.
 
 The [Skein-1024 NIST submission paper](http://www.skein-hash.info/sites/default/files/skein1.3.pdf) provides a simple plan for implementing Skein-1024 in a way that essentially makes it Threefish-1024 in counter mode. We do [encrypt then mac](http://www.thoughtcrime.org/blog/the-cryptographic-doom-principle/) using our Skein-1024-HMAC inside our Clojurescript. We bundle a randomly generated nonce, the hmac, and the ciphertext together into a Clojure map, and we wanted to avoid weird timing attack potential by doing the HMAC check inside Clojurescript using a timing-safe memcmp.
 
