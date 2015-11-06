@@ -1,9 +1,7 @@
 # trabant
 A C library meant to be used with [Emscripten](https://github.com/kripken/emscripten) to provide some needed cryptographic primitives in Javascript, or, in our case, [Clojurescript](https://github.com/clojure/clojurescript).
 
-Javascript has a whole host of cryptography libraries you can use: SJCL is fantastic. We are putting ours out there so people can vet our product, [Balboa](https://balboa.io). If you like what you see, feel free to take it!
-
-This library attempts to be nothing. As unambitious as possible. Like the trabant.
+Javascript has a whole host of great cryptography libraries you can use. SJCL is a good one, for example. We are putting ours out there so people can vet our product, [Balboa](https://balboa.io). If you like what you see, feel free to just take it.
 
 ## Goals
 
