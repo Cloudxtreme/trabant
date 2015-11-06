@@ -10,9 +10,12 @@ This library attempts to be nothing. As unambitious as possible. Like the traban
 *The goal of this library is to get out of the way.* We merely copy, as faithfully as possible, the awesome work of [the Skein team](https://www.schneier.com/skein-team.html), [Colin Percival (scrypt)](http://www.tarsnap.com/scrypt.html), and [Daniel J. Bernstein (DJB)](http://tweetnacl.cr.yp.to/). All this library tries to accomplish is to call the underlying implementations with as little chance for screw up imaginable. Any excess ceremony should be perceived as a bug and corporal force should be executed against it with extreme prejudice.
 
 ## Skein 1024 as Swiss Army Knife 
-No big surprises here for you applied crypto folks, but you can do just about anything with one really good pseudo-random function. Thankfully, the Skein team gave us a damn good one in the SHA-3 competition. Simple and elegant ARX construction, fast on x86/x64, and no huge advantage on an ASIC (compared to Keccak). Since this will end up running on general purpose computers, this is good for us.
+No big surprises here for you applied crypto folks, but you can do just about anything with one really good pseudo-random function. Thankfully, the Skein team gave us a great one in the SHA-3 competition. Simple and elegant ARX construction, fast on x86/x64, and no huge advantage on an ASIC (compared to Keccak). Since this will end up running on general purpose computers, this is good for us.
 
 Also, a very clean reference implementation like the one sent to NIST gives us a great piece of bedrock upon which to build all the primitives we use in Balboa.
+
+## TweetNaCl
+NaCl needs no introduction. Just a great library for ed25519. We use tweetnacl because it is just a lot easier to compile.
 
 ## Hash
 Skein-1024 PRF with a personalization string.
