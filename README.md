@@ -7,9 +7,6 @@ Javascript already has some good cryptography libraries you can use. SJCL is a g
 
 *The goal of this library is to get out of the way.* We merely copy, as faithfully as possible, the awesome work of [the Skein team](https://www.schneier.com/skein-team.html), [Colin Percival (scrypt)](http://www.tarsnap.com/scrypt.html), and [Daniel J. Bernstein (DJB)](http://tweetnacl.cr.yp.to/). All this library tries to accomplish is to call the underlying implementations with as little chance for screw up imaginable. Any excess ceremony should be perceived as a bug and corporal force should be executed against it with extreme prejudice.
 
-##### Aside: "Javascrypt Cryptopgrahy Considered Harmful" Considered Old-school 
-The value of a library like trabant has been a source of many debates since Thomas Ptacek's 2011 article [Javascript Cryptography Considered Harmful]( https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/august/javascript-cryptography-considered-harmful). We feel crypto in the browser as advanced tremendously since 2011, to the point where it is no longer harmful. We  adamantly believe the browser is a space worthy of pursuit for the cryptographer.
-
 ## Skein 1024 as Swiss Army Knife 
 No big surprises here for you applied crypto folks, but you can do just about anything with one really good pseudo-random function. Thankfully, the Skein team gave us a great one in the SHA-3 competition. Simple and elegant ARX construction, fast on x86/x64, and no huge advantage on an ASIC (compared to Keccak). Since this will end up running on general purpose computers, this is good for us.
 
@@ -65,6 +62,9 @@ On line 594 of the x86 implementation, if you compile with -O[1-4] in gcc or -O[
 It is indeed a bit different from how it is offered up in the skein paper. Our approach is more inefficient, but we felt less likely to miss configure the struct Skein1024_Ctxt_t(s).
 
 We differ from the paper in a way we can easily prove is secure if Skein itself is secure, and it gives us a far simpler implementation path for taking advantage of the great ideas offered in the paper. We just update the hash function with our personalization strings, keys, counter values, etc. as opposed to taking advantage of the more complicated features like tree hashing and all the CFG constants in skein.h. Also, messing with endianness just terrifies me, so we chose the safe play.
+
+#### "Javascrypt Cryptopgrahy Considered Harmful" Considered Old-school 
+The value of a library like trabant has been a source of many debates since Thomas Ptacek's 2011 article [Javascript Cryptography Considered Harmful]( https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/august/javascript-cryptography-considered-harmful). We feel crypto in the browser as advanced tremendously since 2011, to the point where it is no longer harmful. We  adamantly believe the browser is a space worthy of pursuit for the cryptographer. The browser isn't perfect for many contexts, which we wholeheartedly concede, but it is by no means always harmful any longer.
 
 ### Appendix: The name "trabant"
 #### What is a trabant?
