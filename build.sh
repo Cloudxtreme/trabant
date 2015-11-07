@@ -29,12 +29,6 @@ FUNCTIONS="[
 
 '_skein_hash_once_js',
 '_skein_pbkdf_js',
-
-'_LEGACY_skein_cipher_init_js',
-'_LEGACY_skein_xor_block_js',
-'_LEGACY_skein_hmac_init_js',
-'_LEGACY_skein_pbkdf_js',
-'_LEGACY_skein_hash_once_js',
 ]"
 
 emcc \
