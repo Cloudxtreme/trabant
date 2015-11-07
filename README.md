@@ -1,7 +1,7 @@
 # trabant
 A C library meant to be used with [Emscripten](https://github.com/kripken/emscripten) to provide some needed cryptographic primitives in Javascript, or, in our case, [Clojurescript](https://github.com/clojure/clojurescript).
 
-Javascript already has some good cryptography libraries you can use. SJCL is a good one, for example. We are putting ours out there so people can vet our product, [Balboa](https://balboa.io), and because ASM.js gives us an edge. If you like what you see, feel free to just take it.
+We made this wrapper around NaCl, Skein, and Scrypt so we wouldn't have to code review other people's hand-done javascript versions of some complex stuff. Instead, we just use the reference implementations in C and compile it using Emscripten to javascript. As far as we're concerned, this doesn't count as "roll your own crypto."
 
 ## Goals
 
