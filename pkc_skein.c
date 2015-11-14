@@ -14,21 +14,6 @@ static void blkxor(uint8_t *output, const uint8_t *inputA, const uint8_t *inputB
   }
 }
 
-int skein_memcmp(const uint8_t *a, const uint8_t *b, size_t n) {
-  uint8_t acc = 0;
-
-  if (!a)
-    return -1;
-  if (!b)
-    return -1;
-
-  for (size_t i = 0; i < n; i++) {
-    acc |= a[i] ^ b[i];
-  }
-
-  return acc;
-}
-
 void skein_crypto_init(
     Skein1024_Ctxt_t *ctx, const size_t message_bit_sz,
     const uint8_t *key, const size_t key_sz,
