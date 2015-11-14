@@ -7,7 +7,7 @@ We made this wrapper around NaCl, Skein, and Scrypt so we wouldn't have to code 
 
 *The goal of this library is to get out of the way.* We merely copy, as faithfully as possible, the awesome work of [the Skein team](https://www.schneier.com/skein-team.html), [Colin Percival (scrypt)](http://www.tarsnap.com/scrypt.html), and [Daniel J. Bernstein (DJB)](http://tweetnacl.cr.yp.to/). All this library tries to accomplish is to call the underlying implementations with as little chance for screw up imaginable. Any excess ceremony should be perceived as a bug and corporal force should be executed against it with extreme prejudice.
 
-## Skein 1024 as Swiss Army Knife 
+## Skein 1024
 No big surprises here for you applied crypto folks, but you can do just about anything with one really good pseudo-random function. Thankfully, the Skein team gave us a great one in the SHA-3 competition. Simple and elegant ARX construction, fast on x86/x64, and no huge advantage on an ASIC (compared to Keccak). Since this will end up running on general purpose computers, this is good for us.
 
 Also, a very clean reference implementation like the one sent to NIST gives us a great piece of bedrock upon which to build all the primitives we use in Balboa.
@@ -36,9 +36,6 @@ Absolutely nothing special here. We call ED25519 box. We do like the afternm and
 
 ## Asymmetric Verify+Decrypt
 Absolutely nothing special here. We call ED25519 open. See the above for info about precomputed keys.
-
-## skein_memcmp
-This is not used in Balboa's client side. We felt weird Emscripten compilation might cause some timing attack to come back, so we do constant time array equality checks using a function in Clojurescript. The skein_memcmp is, however, used internally through JNI bindings. You'll notice it is not exported inside build.sh.
 
 ## PRNG
 Skein-1024-CTR is seeded with our old friend window.crypto.getRandomValues(...). After every call to the PRNG, an additional SKEIN_BLOCK_BYTES is generated, and used to reseed the Skein-1024-CTR. We reseed after every call because we can.
