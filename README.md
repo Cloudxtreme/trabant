@@ -58,14 +58,6 @@ We don't use the Skein-256 or 512 variants, so we took them out. We thought abou
 ##### strict aliasing
 On line 594 of the x86 implementation, if you compile with -O[1-4] in gcc or -O[1-3] in clang, you'll notice a warning about violating strict aliasing rules. Rather than allowing the cast, and being scared of compiler warnings (don't ever ignore them!), we just decided to swap it out with a gratuitious memcpy. See lines 138-140 of skein.c for details.
 
-#### I read the Skein paper, and it talks about UBI nodes. Why are you just calling skein_hash_update instead of initializing it in the way shown in the paper?
-It is indeed a bit different from how it is offered up in the skein paper. Our approach is more inefficient, but we felt less likely to miss configure the struct Skein1024_Ctxt_t(s).
-
-We differ from the paper in a way we can easily prove is secure if Skein itself is secure, and it gives us a far simpler implementation path for taking advantage of the great ideas offered in the paper. We just update the hash function with our personalization strings, keys, counter values, etc. as opposed to taking advantage of the more complicated features like tree hashing and all the CFG constants in skein.h. Also, messing with endianness just terrifies me, so we chose the safe play.
-
-#### "Javascrypt Cryptopgrahy Considered Harmful" Considered Old-school 
-The value of a library like trabant has been a source of many debates since Thomas Ptacek's 2011 article [Javascript Cryptography Considered Harmful]( https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/august/javascript-cryptography-considered-harmful). We feel crypto in the browser has advanced tremendously since 2011, to the point where it is no longer harmful in all contexts. We adamantly believe the browser is a space worthy of pursuit for the cryptographer. The browser isn't perfect for many contexts, which we concede, but it is by no means always harmful.
-
 ### Appendix: The name "trabant"
 #### What is a trabant?
 We are big fans of freedom of speech and privacy and end-to-end encrypted communications, so, we'll let you fill in the blank on our attitudes towards the Stasi.
